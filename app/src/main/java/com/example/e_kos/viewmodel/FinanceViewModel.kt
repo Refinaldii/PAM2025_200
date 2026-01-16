@@ -8,10 +8,8 @@ import com.example.e_kos.data.repository.FinanceRepository
 
 class FinanceViewModel : ViewModel() {
 
-    // 🔥 INI YANG TADI HILANG
     private val repository = FinanceRepository()
 
-    // LIST DATA
     private val _financeList = MutableLiveData<List<Finance>>()
     val financeList: LiveData<List<Finance>> = _financeList
 
@@ -21,9 +19,6 @@ class FinanceViewModel : ViewModel() {
     private val _totalKeluar = MutableLiveData<Int>()
     val totalKeluar: LiveData<Int> = _totalKeluar
 
-
-
-    // SALDO
     private val _saldo = MutableLiveData<Int>()
     val saldo: LiveData<Int> = _saldo
 
@@ -34,11 +29,10 @@ class FinanceViewModel : ViewModel() {
             var masuk = 0
             var keluar = 0
 
-            list.forEach {
-                if (it.tipe.uppercase() == "MASUK") {
-                    masuk += it.jumlah
-                } else if (it.tipe.uppercase() == "KELUAR") {
-                    keluar += it.jumlah
+            list.forEach { data ->
+                when (data.tipe.uppercase()) {
+                    "MASUK" -> masuk += data.jumlah
+                    "KELUAR" -> keluar += data.jumlah
                 }
             }
 
@@ -48,23 +42,18 @@ class FinanceViewModel : ViewModel() {
         }
     }
 
-
     fun addFinance(finance: Finance) {
-        repository.addFinance(finance) {
-            loadFinance()
-        }
+        repository.addFinance(finance)
+        loadFinance()
     }
 
     fun updateFinance(finance: Finance) {
-        repository.updateFinance(finance) {
-            loadFinance()
-        }
+        repository.updateFinance(finance)
+        loadFinance()
     }
 
     fun deleteFinance(id: String) {
-        repository.deleteFinance(id) {
-            loadFinance()
-        }
+        repository.deleteFinance(id)
+        loadFinance()
     }
-
 }

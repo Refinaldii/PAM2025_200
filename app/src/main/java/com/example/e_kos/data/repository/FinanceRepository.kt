@@ -1,51 +1,37 @@
 package com.example.e_kos.data.repository
 
 import com.example.e_kos.data.model.Finance
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class FinanceRepository {
 
     private val db = FirebaseFirestore.getInstance()
-    private val collection = db.collection("finance")
+    private val uid = FirebaseAuth.getInstance().currentUser?.uid
 
-    fun addFinance(finance: Finance, callback: (Boolean) -> Unit) {
+    private val collection
+        get() = db.collection("users")
+            .document(uid ?: "unknown")
+            .collection("finance")
+
+    fun addFinance(finance: Finance) {
         val doc = collection.document()
-        val newData = finance.copy(id = doc.id)
-        doc.set(newData)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    callback(true)
-                } else {
-                    callback(false)
-                }
-            }
+        val data = finance.copy(id = doc.id)
+        doc.set(data)
     }
 
     fun getAllFinance(callback: (List<Finance>) -> Unit) {
         collection.get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val list = task.result.toObjects(Finance::class.java)
-                    callback(list)
-                } else {
-                    callback(emptyList())
-                }
+            .addOnSuccessListener {
+                callback(it.toObjects(Finance::class.java))
             }
     }
 
-    fun updateFinance(finance: Finance, callback: (Boolean) -> Unit) {
-        collection.document(finance.id)
-            .set(finance)
-            .addOnSuccessListener { callback(true) }
-            .addOnFailureListener { callback(false) }
+    fun deleteFinance(id: String) {
+        collection.document(id).delete()
     }
 
-    fun deleteFinance(id: String, callback: (Boolean) -> Unit) {
-        collection.document(id)
-            .delete()
-            .addOnSuccessListener { callback(true) }
-            .addOnFailureListener { callback(false) }
+    fun updateFinance(finance: Finance) {
+        collection.document(finance.id).set(finance)
     }
-
-
 }
