@@ -74,6 +74,19 @@ class DashboardActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.tvBalance).text = "Rp $total"
         }
 
+        viewModel.totalMasuk.observe(this) {
+            findViewById<TextView>(R.id.tvIncome).text = "Masuk: Rp $it"
+        }
+
+        viewModel.totalKeluar.observe(this) {
+            findViewById<TextView>(R.id.tvExpense).text = "Keluar: Rp $it"
+        }
+
+        viewModel.saldo.observe(this) {
+            findViewById<TextView>(R.id.tvBalance).text = "Rp $it"
+        }
+
+
 
         viewModel.loadFinance()
     }

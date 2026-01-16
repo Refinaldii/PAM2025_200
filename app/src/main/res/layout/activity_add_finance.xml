@@ -25,15 +25,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/etTipe"
-        android:hint="MASUK / KELUAR"
-        android:textColor="@color/text_light"
-        android:textColorHint="@color/text_light"
-        android:backgroundTint="@color/neon_cyan"
-        android:layout_marginTop="8dp"
+    <Spinner
+        android:id="@+id/spTipe"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"/>
+
 
     <Button
         android:id="@+id/btnSimpan"

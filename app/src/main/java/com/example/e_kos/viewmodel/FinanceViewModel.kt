@@ -15,6 +15,14 @@ class FinanceViewModel : ViewModel() {
     private val _financeList = MutableLiveData<List<Finance>>()
     val financeList: LiveData<List<Finance>> = _financeList
 
+    private val _totalMasuk = MutableLiveData<Int>()
+    val totalMasuk: LiveData<Int> = _totalMasuk
+
+    private val _totalKeluar = MutableLiveData<Int>()
+    val totalKeluar: LiveData<Int> = _totalKeluar
+
+
+
     // SALDO
     private val _saldo = MutableLiveData<Int>()
     val saldo: LiveData<Int> = _saldo
@@ -23,17 +31,23 @@ class FinanceViewModel : ViewModel() {
         repository.getAllFinance { list ->
             _financeList.value = list
 
-            var total = 0
-            list.forEach { finance ->
-                if (finance.tipe.uppercase() == "MASUK") {
-                    total += finance.jumlah
-                } else if (finance.tipe.uppercase() == "KELUAR") {
-                    total -= finance.jumlah
+            var masuk = 0
+            var keluar = 0
+
+            list.forEach {
+                if (it.tipe.uppercase() == "MASUK") {
+                    masuk += it.jumlah
+                } else if (it.tipe.uppercase() == "KELUAR") {
+                    keluar += it.jumlah
                 }
             }
-            _saldo.value = total
+
+            _totalMasuk.value = masuk
+            _totalKeluar.value = keluar
+            _saldo.value = masuk - keluar
         }
     }
+
 
     fun addFinance(finance: Finance) {
         repository.addFinance(finance) {
