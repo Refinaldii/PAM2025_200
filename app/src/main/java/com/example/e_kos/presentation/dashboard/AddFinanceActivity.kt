@@ -15,6 +15,11 @@ class AddFinanceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // === ACTION BAR (BACK BUTTON) ===
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Tambah Catatan"
+
         setContentView(R.layout.activity_add_finance)
 
         val etJudul = findViewById<EditText>(R.id.etJudul)
@@ -22,29 +27,26 @@ class AddFinanceActivity : AppCompatActivity() {
         val spinner = findViewById<Spinner>(R.id.spTipe)
         val btnSimpan = findViewById<Button>(R.id.btnSimpan)
 
-        // ===== SPINNER (PUTIH, CUSTOM) =====
+        // === SPINNER PUTIH (CUSTOM) ===
         val adapter = ArrayAdapter.createFromResource(
             this,
             R.array.finance_type,
             R.layout.item_spinner
         )
-        adapter.setDropDownViewResource(
-            R.layout.item_spinner_dropdown
-        )
+        adapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
         spinner.adapter = adapter
 
-        // ===== MODE EDIT =====
+        // === MODE EDIT ===
         financeId = intent.getStringExtra("id")
         if (financeId != null) {
             etJudul.setText(intent.getStringExtra("judul"))
             etJumlah.setText(intent.getIntExtra("jumlah", 0).toString())
 
             val tipe = intent.getStringExtra("tipe")
-            if (tipe == "KELUAR") spinner.setSelection(1)
-            else spinner.setSelection(0)
+            spinner.setSelection(if (tipe == "KELUAR") 1 else 0)
         }
 
-        // ===== SIMPAN =====
+        // === SIMPAN DATA ===
         btnSimpan.setOnClickListener {
             if (etJudul.text.isNullOrEmpty() || etJumlah.text.isNullOrEmpty()) {
                 Toast.makeText(this, "Data tidak boleh kosong", Toast.LENGTH_SHORT).show()
@@ -67,5 +69,11 @@ class AddFinanceActivity : AppCompatActivity() {
 
             finish()
         }
+    }
+
+    // === BACK ARROW HANDLER ===
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }
