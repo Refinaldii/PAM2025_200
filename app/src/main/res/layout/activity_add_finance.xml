@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@color/bg_dark"
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -8,6 +8,9 @@
     <EditText
         android:id="@+id/etJudul"
         android:hint="Judul"
+        android:textColor="@color/text_light"
+        android:textColorHint="@color/text_light"
+        android:backgroundTint="@color/neon_cyan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -15,18 +18,29 @@
         android:id="@+id/etJumlah"
         android:hint="Jumlah"
         android:inputType="number"
+        android:textColor="@color/text_light"
+        android:textColorHint="@color/text_light"
+        android:backgroundTint="@color/neon_cyan"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/etTipe"
         android:hint="MASUK / KELUAR"
+        android:textColor="@color/text_light"
+        android:textColorHint="@color/text_light"
+        android:backgroundTint="@color/neon_cyan"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/btnSimpan"
         android:text="Simpan"
+        android:backgroundTint="@color/neon_pink"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </LinearLayout>

@@ -8,20 +8,49 @@ import com.example.e_kos.data.repository.FinanceRepository
 
 class FinanceViewModel : ViewModel() {
 
-    private val repo = FinanceRepository()
+    // 🔥 INI YANG TADI HILANG
+    private val repository = FinanceRepository()
 
+    // LIST DATA
     private val _financeList = MutableLiveData<List<Finance>>()
     val financeList: LiveData<List<Finance>> = _financeList
 
+    // SALDO
+    private val _saldo = MutableLiveData<Int>()
+    val saldo: LiveData<Int> = _saldo
+
     fun loadFinance() {
-        repo.getAllFinance {
-            _financeList.value = it
+        repository.getAllFinance { list ->
+            _financeList.value = list
+
+            var total = 0
+            list.forEach { finance ->
+                if (finance.tipe.uppercase() == "MASUK") {
+                    total += finance.jumlah
+                } else if (finance.tipe.uppercase() == "KELUAR") {
+                    total -= finance.jumlah
+                }
+            }
+            _saldo.value = total
         }
     }
 
     fun addFinance(finance: Finance) {
-        repo.addFinance(finance) {
+        repository.addFinance(finance) {
             loadFinance()
         }
     }
+
+    fun updateFinance(finance: Finance) {
+        repository.updateFinance(finance) {
+            loadFinance()
+        }
+    }
+
+    fun deleteFinance(id: String) {
+        repository.deleteFinance(id) {
+            loadFinance()
+        }
+    }
+
 }

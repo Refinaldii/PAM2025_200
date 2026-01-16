@@ -2,9 +2,9 @@
 <resources>
 
     <style name="Theme.EKos.AppCompat" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryDark">@color/purple_700</item>
-        <item name="colorAccent">@color/teal_200</item>
+        <item name="colorPrimary">@color/bg_dark</item>
+        <item name="colorPrimaryDark">@color/card_dark</item>
+        <item name="colorAccent">@color/neon_cyan</item>
     </style>
 
 </resources>

@@ -8,10 +8,13 @@ import android.widget.EditText
 import com.example.e_kos.R
 import com.example.e_kos.data.model.Finance
 import com.example.e_kos.viewmodel.FinanceViewModel
+import android.widget.Toast
+
 
 class AddFinanceActivity : AppCompatActivity() {
 
     private val viewModel: FinanceViewModel by viewModels()
+    private var financeId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +26,11 @@ class AddFinanceActivity : AppCompatActivity() {
         val btnSimpan = findViewById<Button>(R.id.btnSimpan)
 
         btnSimpan.setOnClickListener {
+            if (etJudul.text.isNullOrEmpty() || etJumlah.text.isNullOrEmpty()) {
+                Toast.makeText(this, "Data tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val data = Finance(
                 judul = etJudul.text.toString(),
                 jumlah = etJumlah.text.toString().toInt(),
@@ -32,5 +40,29 @@ class AddFinanceActivity : AppCompatActivity() {
             viewModel.addFinance(data)
             finish()
         }
+        financeId = intent.getStringExtra("id")
+
+        if (financeId != null) {
+            etJudul.setText(intent.getStringExtra("judul"))
+            etJumlah.setText(intent.getIntExtra("jumlah", 0).toString())
+            etTipe.setText(intent.getStringExtra("tipe"))
+        }
+        btnSimpan.setOnClickListener {
+            val data = Finance(
+                id = financeId ?: "",
+                judul = etJudul.text.toString(),
+                jumlah = etJumlah.text.toString().toInt(),
+                tanggal = System.currentTimeMillis().toString(),
+                tipe = etTipe.text.toString()
+            )
+
+            if (financeId == null) {
+                viewModel.addFinance(data)
+            } else {
+                viewModel.updateFinance(data)
+            }
+            finish()
+        }
+
     }
 }

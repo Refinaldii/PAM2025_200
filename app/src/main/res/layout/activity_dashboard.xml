@@ -1,19 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@color/bg_dark"
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- SALDO -->
+    <TextView
+        android:text="Total Saldo"
+        android:textColor="@color/text_light"
+        android:textSize="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvBalance"
+        android:text="Rp 0"
+        android:textColor="@color/neon_cyan"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- RINGKASAN -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/tvIncome"
+            android:text="Masuk: Rp 0"
+            android:textColor="@color/neon_pink"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvExpense"
+            android:text="Keluar: Rp 0"
+            android:textColor="@color/text_light"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- BUTTON -->
     <Button
         android:id="@+id/btnAdd"
         android:text="Tambah Catatan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <Button
+        android:id="@+id/btnLogout"
+        android:text="Logout"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- LIST TRANSAKSI -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFinance"
+        android:layout_marginTop="12dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="12dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
 </LinearLayout>

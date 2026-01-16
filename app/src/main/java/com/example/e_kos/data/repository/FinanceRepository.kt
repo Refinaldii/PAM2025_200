@@ -32,4 +32,20 @@ class FinanceRepository {
                 }
             }
     }
+
+    fun updateFinance(finance: Finance, callback: (Boolean) -> Unit) {
+        collection.document(finance.id)
+            .set(finance)
+            .addOnSuccessListener { callback(true) }
+            .addOnFailureListener { callback(false) }
+    }
+
+    fun deleteFinance(id: String, callback: (Boolean) -> Unit) {
+        collection.document(id)
+            .delete()
+            .addOnSuccessListener { callback(true) }
+            .addOnFailureListener { callback(false) }
+    }
+
+
 }

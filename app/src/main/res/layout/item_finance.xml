@@ -5,7 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView android:id="@+id/tvJudul" />
-    <TextView android:id="@+id/tvJumlah" />
-    <TextView android:id="@+id/tvTipe" />
+    <TextView
+        android:id="@+id/tvJudul"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Judul"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvJumlah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jumlah"/>
+
+    <TextView
+        android:id="@+id/tvTipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tipe"/>
+
+    <!-- BUTTON AREA -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btnEdit"
+            android:text="Edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:text="Delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
 </LinearLayout>
