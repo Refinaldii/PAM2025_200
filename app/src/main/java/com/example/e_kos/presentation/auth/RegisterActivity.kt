@@ -18,35 +18,40 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // 🔙 BACK
         binding.btnBack.setOnClickListener {
             finish()
+        }
 
-            binding.btnRegister.setOnClickListener {
-                val email = binding.etEmail.text.toString()
-                val password = binding.etPassword.text.toString()
+        // 📝 REGISTER
+        binding.btnRegister.setOnClickListener {
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
 
-                if (email.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(this, "Email & Password wajib diisi", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-
-                if (password.length < 6) {
-                    Toast.makeText(this, "Password minimal 6 karakter", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-
-                viewModel.register(email, password)
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Email & Password wajib diisi", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
 
-            viewModel.registerResult.observe(this) { success ->
-                if (success) {
-                    Toast.makeText(this, "Register berhasil", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, DashboardActivity::class.java))
-                    finish()
-                } else {
-                    Toast.makeText(this, "Register gagal", Toast.LENGTH_SHORT).show()
-                }
+            if (password.length < 6) {
+                Toast.makeText(this, "Password minimal 6 karakter", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            viewModel.register(email, password)
+        }
+
+        // 👂 OBSERVER RESULT
+        viewModel.registerResult.observe(this) { success ->
+            if (success) {
+                Toast.makeText(this, "Register berhasil", Toast.LENGTH_SHORT).show()
+                finish() // balik ke Login
+            } else {
+                Toast.makeText(this, "Register gagal", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 }
+
