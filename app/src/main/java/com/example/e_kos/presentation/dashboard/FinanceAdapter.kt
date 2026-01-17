@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_kos.data.model.Finance
 import com.example.e_kos.databinding.ItemFinanceBinding
+import com.example.e_kos.utils.CurrencyHelper
 
 class FinanceAdapter(
     private val list: List<Finance>,
@@ -28,7 +29,9 @@ class FinanceAdapter(
         val data = list[position]
 
         holder.binding.tvJudul.text = data.judul
-        holder.binding.tvJumlah.text = data.jumlah.toString()
+
+        holder.binding.tvJumlah.text =
+            CurrencyHelper.formatRupiah(data.jumlah)
         holder.binding.tvTipe.text = data.tipe
 
         holder.binding.btnEdit.setOnClickListener {

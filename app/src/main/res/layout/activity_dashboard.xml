@@ -24,6 +24,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barChart"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_marginTop="16dp"/>
+
+
+
     <!-- RINGKASAN -->
     <LinearLayout
         android:orientation="horizontal"

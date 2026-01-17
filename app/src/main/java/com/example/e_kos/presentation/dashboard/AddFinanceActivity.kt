@@ -16,6 +16,10 @@ class AddFinanceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_finance)
+        val btnBack = findViewById<Button>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            finish()
+        }
 
         val etJudul = findViewById<EditText>(R.id.etJudul)
         val etJumlah = findViewById<EditText>(R.id.etJumlah)
